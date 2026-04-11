@@ -11,32 +11,48 @@ public class Capitalize {
         }
         try (BufferedInputStream in = new BufferedInputStream(new FileInputStream(args[0]));
              BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(args[1]))) {
-            boolean newWord = true;
+            boolean inWord = false;
+            boolean pendingSpace = false;
+            boolean wroteAny = false;
             byte[] buffer = new byte[4096];
             int read;
             while ((read = in.read(buffer)) != -1) {
                 for (int i = 0; i < read; i++) {
                     int b = buffer[i] & 0xFF;
-                    if (b >= 'A' && b <= 'Z') {
-                        if (newWord) {
-                            out.write(b);
-                        } else {
-                            out.write(b);
+                    if (isWhitespace(b)) {
+                        if (inWord) {
+                            pendingSpace = true;
+                            inWord = false;
                         }
-                        newWord = false;
-                    } else if (b >= 'a' && b <= 'z') {
-                        if (newWord) {
+                        continue;
+                    }
+                    if (pendingSpace && wroteAny) {
+                        out.write(' ');
+                        pendingSpace = false;
+                    }
+                    if (!inWord) {
+                        if (b >= 'a' && b <= 'z') {
                             out.write(b - ('a' - 'A'));
+                        } else if (b >= 'A' && b <= 'Z') {
+                            out.write(b);
                         } else {
                             out.write(b);
                         }
-                        newWord = false;
+                        inWord = true;
+                        wroteAny = true;
                     } else {
-                        out.write(b);
-                        newWord = true;
+                        if (b >= 'A' && b <= 'Z') {
+                            out.write(b + ('a' - 'A'));
+                        } else {
+                            out.write(b);
+                        }
                     }
                 }
             }
         }
+    }
+
+    private static boolean isWhitespace(int b) {
+        return b == ' ' || b == '\t' || b == '\n' || b == '\r' || b == '\f';
     }
 }
