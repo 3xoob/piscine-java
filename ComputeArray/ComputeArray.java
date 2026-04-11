@@ -14,7 +14,7 @@ public class ComputeArray {
             } else if (mod == 1) {
                 result[i] = value + 7;
             } else {
-                result[i] = value - 7;
+                result[i] = value;
             }
         }
         return result;
