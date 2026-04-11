@@ -7,15 +7,14 @@ public class ComputeArray {
         for (int i = 0; i < array.length; i++) {
             int value = array[i];
             int mod = value % 3;
-            if (mod < 0) {
-                mod += 3;
-            }
             if (mod == 0) {
-                result[i] = value < 0 ? value : value * 5;
+                result[i] = value * 5;
+            } else if (value < 0) {
+                result[i] = value;
             } else if (mod == 1) {
                 result[i] = value + 7;
             } else {
-                result[i] = value < 0 ? value - 7 : value;
+                result[i] = value - 7;
             }
         }
         return result;
