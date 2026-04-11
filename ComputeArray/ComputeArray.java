@@ -11,11 +11,11 @@ public class ComputeArray {
                 mod += 3;
             }
             if (mod == 0) {
-                result[i] = value * 5;
+                result[i] = value < 0 ? value : value * 5;
             } else if (mod == 1) {
                 result[i] = value + 7;
             } else {
-                result[i] = value - 7;
+                result[i] = value < 0 ? value - 7 : value;
             }
         }
         return result;
