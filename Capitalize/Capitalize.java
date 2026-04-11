@@ -21,7 +21,7 @@ public class Capitalize {
                         if (newWord) {
                             out.write(b);
                         } else {
-                            out.write(b + ('a' - 'A'));
+                            out.write(b);
                         }
                         newWord = false;
                     } else if (b >= 'a' && b <= 'z') {
