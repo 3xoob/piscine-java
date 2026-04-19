@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Character {
-    private static final List<Character> allCharacters = new ArrayList<>();
+    private static List<Character> allCharacters = new ArrayList<>();
 
     private final int maxHealth;
     private int currentHealth;
