@@ -7,7 +7,7 @@ public abstract class Character {
     private final int maxHealth;
     private int currentHealth;
     private final String name;
-    protected final Weapon weapon;
+    private final Weapon weapon;
 
     public Character(String name, int maxHealth) {
         this(name, maxHealth, null);
