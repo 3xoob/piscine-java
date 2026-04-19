@@ -23,6 +23,15 @@ public abstract class Character {
         return currentHealth;
     }
 
+    public void setCurrentHealth(int currentHealth) {
+        this.currentHealth = currentHealth;
+        if (this.currentHealth < 0) {
+            this.currentHealth = 0;
+        } else if (this.currentHealth > maxHealth) {
+            this.currentHealth = maxHealth;
+        }
+    }
+
     public String getName() {
         return name;
     }
