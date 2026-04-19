@@ -18,9 +18,9 @@ public class Sorcerer extends Character implements Healer {
 
     @Override
     public String toString() {
-        if (currentHealth == 0) {
-            return name + " is a dead sorcerer. So bad, it could heal " + healCapacity + " HP.";
+        if (getCurrentHealth() == 0) {
+            return getName() + " is a dead sorcerer. So bad, it could heal " + healCapacity + " HP.";
         }
-        return name + " is a sorcerer with " + currentHealth + " HP. It can heal " + healCapacity + " HP.";
+        return getName() + " is a sorcerer with " + getCurrentHealth() + " HP. It can heal " + healCapacity + " HP.";
     }
 }
