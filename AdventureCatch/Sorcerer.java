@@ -18,7 +18,7 @@ public class Sorcerer extends Character implements Healer {
 
     @Override
     public void heal(Character character) throws DeadCharacterException {
-        if (currentHealth == 0) {
+        if (getCurrentHealth() == 0) {
             throw new DeadCharacterException(this);
         }
         character.addHealth(healCapacity);
@@ -26,7 +26,7 @@ public class Sorcerer extends Character implements Healer {
 
     @Override
     public void attack(Character target) throws DeadCharacterException {
-        if (currentHealth == 0) {
+        if (getCurrentHealth() == 0) {
             throw new DeadCharacterException(this);
         }
         heal(this);
@@ -35,20 +35,18 @@ public class Sorcerer extends Character implements Healer {
 
     @Override
     public void takeDamage(int damage) throws DeadCharacterException {
-        if (currentHealth == 0) {
+        if (getCurrentHealth() == 0) {
             throw new DeadCharacterException(this);
         }
-        currentHealth -= damage;
-        if (currentHealth < 0) {
-            currentHealth = 0;
-        }
+        setCurrentHealth(getCurrentHealth() - damage);
     }
 
     @Override
     public String toString() {
-        if (currentHealth == 0) {
-            return name + " is a dead sorcerer. So bad, it could heal " + healCapacity + " HP." + weaponSuffix();
+        if (getCurrentHealth() == 0) {
+            return getName() + " is a dead sorcerer. So bad, it could heal " + healCapacity + " HP." + weaponSuffix();
         }
-        return name + " is a sorcerer with " + currentHealth + " HP. It can heal " + healCapacity + " HP." + weaponSuffix();
+        return getName() + " is a sorcerer with " + getCurrentHealth() + " HP. It can heal " + healCapacity + " HP."
+                + weaponSuffix();
     }
 }

@@ -4,10 +4,10 @@ import java.util.List;
 public abstract class Character {
     private static List<Character> allCharacters = new ArrayList<>();
 
-    protected final int maxHealth;
-    protected int currentHealth;
-    protected final String name;
-    protected final Weapon weapon;
+    private final int maxHealth;
+    private int currentHealth;
+    private final String name;
+    private final Weapon weapon;
 
     public Character(String name, int maxHealth) {
         this(name, maxHealth, null);
@@ -29,6 +29,18 @@ public abstract class Character {
         return currentHealth;
     }
 
+    protected void setCurrentHealth(int currentHealth) {
+        if (currentHealth < 0) {
+            this.currentHealth = 0;
+            return;
+        }
+        if (currentHealth > maxHealth) {
+            this.currentHealth = maxHealth;
+            return;
+        }
+        this.currentHealth = currentHealth;
+    }
+
     public String getName() {
         return name;
     }
@@ -38,10 +50,7 @@ public abstract class Character {
     }
 
     protected void addHealth(int amount) {
-        currentHealth += amount;
-        if (currentHealth > maxHealth) {
-            currentHealth = maxHealth;
-        }
+        setCurrentHealth(currentHealth + amount);
     }
 
     protected int getAttackDamage(int defaultDamage) {
