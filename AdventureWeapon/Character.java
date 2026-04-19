@@ -29,6 +29,18 @@ public abstract class Character {
         return currentHealth;
     }
 
+    public void setCurrentHealth(int currentHealth) {
+        if (currentHealth < 0) {
+            this.currentHealth = 0;
+            return;
+        }
+        if (currentHealth > maxHealth) {
+            this.currentHealth = maxHealth;
+            return;
+        }
+        this.currentHealth = currentHealth;
+    }
+
     public String getName() {
         return name;
     }
