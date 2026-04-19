@@ -62,7 +62,7 @@ public class Character {
         if (allCharacters.isEmpty()) {
             builder.append("Nobody's fighting right now !\n");
         } else {
-            builder.append("Characters currently fighting : \n");
+            builder.append("Characters currently fighting :\n");
             for (Character character : allCharacters) {
                 builder.append(" - ").append(character).append("\n");
             }
