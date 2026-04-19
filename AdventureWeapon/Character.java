@@ -4,7 +4,7 @@ import java.util.List;
 public abstract class Character {
     private static List<Character> allCharacters = new ArrayList<>();
 
-    protected final int maxHealth;
+    private final int maxHealth;
     private int currentHealth;
     private final String name;
     protected final Weapon weapon;
