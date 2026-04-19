@@ -6,7 +6,7 @@ public abstract class Character {
 
     protected final int maxHealth;
     protected int currentHealth;
-    protected final String name;
+    private final String name;
     protected final Weapon weapon;
 
     public Character(String name, int maxHealth) {
