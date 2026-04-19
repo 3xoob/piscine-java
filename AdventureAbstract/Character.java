@@ -37,21 +37,18 @@ public abstract class Character {
     }
 
     protected void addHealth(int amount) {
-        currentHealth += amount;
-        if (currentHealth > maxHealth) {
-            currentHealth = maxHealth;
-        }
+        setCurrentHealth(getCurrentHealth() + amount);
     }
 
     public static Character fight(Character first, Character second) {
-        while (first.currentHealth > 0 && second.currentHealth > 0) {
+        while (first.getCurrentHealth() > 0 && second.getCurrentHealth() > 0) {
             first.attack(second);
-            if (second.currentHealth == 0) {
+            if (second.getCurrentHealth() == 0) {
                 return first;
             }
             second.attack(first);
         }
-        return second.currentHealth > 0 ? second : first;
+        return second.getCurrentHealth() > 0 ? second : first;
     }
 
     public static String printStatus() {
@@ -75,9 +72,9 @@ public abstract class Character {
 
     @Override
     public String toString() {
-        if (currentHealth == 0) {
-            return name + " : KO";
+        if (getCurrentHealth() == 0) {
+            return getName() + " : KO";
         }
-        return name + " : " + currentHealth + "/" + maxHealth;
+        return getName() + " : " + getCurrentHealth() + "/" + getMaxHealth();
     }
 }

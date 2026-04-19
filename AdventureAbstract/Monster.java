@@ -10,10 +10,7 @@ public class Monster extends Character {
 
     @Override
     public void takeDamage(int damage) {
-        currentHealth -= (damage * 8) / 10;
-        if (currentHealth < 0) {
-            currentHealth = 0;
-        }
+        setCurrentHealth(getCurrentHealth() - ((damage * 8) / 10));
     }
 
     @Override
