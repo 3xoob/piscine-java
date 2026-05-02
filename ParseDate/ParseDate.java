@@ -39,8 +39,12 @@ public class ParseDate {
             return LocalTime.parse(stringDate, formatter);
         } catch (DateTimeParseException e) {
             try {
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh 'hours in the' a, mm 'minutes and' ss 'seconds'", Locale.ENGLISH);
-                return LocalTime.parse(stringDate, formatter);
+                String normalized = stringDate
+                    .replace("in the morning", "AM")
+                    .replace("in the evening", "PM")
+                    .replace("at night", "PM");
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh 'hours' a, mm 'minutes and' ss 'seconds'", Locale.ENGLISH);
+                return LocalTime.parse(normalized, formatter);
             } catch (DateTimeParseException ignored) {
                 return null;
             }
