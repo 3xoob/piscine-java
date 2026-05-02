@@ -2,6 +2,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
 import java.util.Locale;
 
@@ -22,11 +23,22 @@ public class ParseDate {
         if (stringDate == null) {
             return null;
         }
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE d MMMM yyyy", Locale.FRENCH);
         try {
+            DateTimeFormatter formatter = new DateTimeFormatterBuilder()
+                .parseCaseInsensitive()
+                .appendPattern("EEEE d MMMM yyyy")
+                .toFormatter(Locale.FRENCH);
             return LocalDate.parse(stringDate, formatter);
         } catch (DateTimeParseException e) {
-            return null;
+            try {
+                DateTimeFormatter formatter = new DateTimeFormatterBuilder()
+                    .parseCaseInsensitive()
+                    .appendPattern("EEEE d MMMM yyyy")
+                    .toFormatter(Locale.ENGLISH);
+                return LocalDate.parse(stringDate, formatter);
+            } catch (DateTimeParseException ignored) {
+                return null;
+            }
         }
     }
 
