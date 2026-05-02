@@ -34,11 +34,16 @@ public class ParseDate {
         if (stringDate == null) {
             return null;
         }
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh 'heures du' a, mm 'minutes et' ss 'secondes'", Locale.FRENCH);
         try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh 'heures du' a, mm 'minutes et' ss 'secondes'", Locale.FRENCH);
             return LocalTime.parse(stringDate, formatter);
         } catch (DateTimeParseException e) {
-            return null;
+            try {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh 'hours in the' a, mm 'minutes and' ss 'seconds'", Locale.ENGLISH);
+                return LocalTime.parse(stringDate, formatter);
+            } catch (DateTimeParseException ignored) {
+                return null;
+            }
         }
     }
 }
